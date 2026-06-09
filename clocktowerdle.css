@@ -1,0 +1,73 @@
+* {
+    font-family: 'MedievalSharp';
+    font-weight: bold;
+}
+
+body {
+    background-image: url("https://cdn.creativefabrica.com/2022/02/20/Purple-abstract-texture-background-Graphics-25584971-1.jpg");
+    background-attachment: fixed;
+    margin: 0;
+}
+
+datalist {
+    width: 16vh;
+}
+
+#characters {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 0.5vh;
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2.5vh;
+    row-gap: 2vh;
+}
+
+#answerText, .details {
+    display: flex;
+    justify-content: center;
+}
+
+#answerText p {
+    color: white;
+    text-align: center;
+    width: 20vh;
+}
+
+.circleWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20vh;
+    height: 20vh;
+}
+
+.circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 18vh;
+    height: 18vh;
+    border: 0.28vh solid black;
+    border-radius: 25vh;
+}
+
+.circle p {
+    text-align: center;
+}
+
+#congratsMsg {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 0.5vh;
+}
+
+#congratsMsg p {
+    margin: 0;
+}
