@@ -3,6 +3,13 @@
     font-weight: bold;
 }
 
+body, html {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+}
+
 body {
     background-image: url("https://cdn.creativefabrica.com/2022/02/20/Purple-abstract-texture-background-Graphics-25584971-1.jpg");
     background-attachment: fixed;
