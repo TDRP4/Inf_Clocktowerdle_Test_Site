@@ -16,10 +16,6 @@ body {
     margin: 0;
 }
 
-datalist {
-    width: 16vh;
-}
-
 #characters {
     display: flex;
     flex-direction: column;
@@ -33,6 +29,13 @@ datalist {
     align-items: center;
     padding: 2.5vh;
     row-gap: 2vh;
+}
+
+#topContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 1vh;
 }
 
 #answerText, .details {
@@ -77,4 +80,16 @@ datalist {
 
 #congratsMsg p {
     margin: 0;
+}
+
+.hovElem {
+    position: absolute;
+    background-color: black;
+    outline: 0.25vh solid red;
+    padding: 0.2vh 0.4vh 0.2vh 0.4vh;
+}
+
+.hovElem p {
+    margin: 0;
+    color: red;
 }
