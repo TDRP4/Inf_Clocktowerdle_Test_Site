@@ -1,6 +1,6 @@
 //Wrap everything in a function for resetting
 const characters = ([
-    {name: "Chef", script: "Trouble Brewing", type: "Townsfolk", wakes: "Once", selects: "No", info: "No",
+    {name: "Chef", script: "Trouble Brewing", type: "Townsfolk", wakes: "Once", selects: "No", info: "Yes",
         abilities: ["Learns Number", "Positioning", "Alignment"]
     },
     {name: "Librarian", script: "Trouble Brewing", type: "Townsfolk", wakes: "Once", selects: "No", info: "Yes",
@@ -359,7 +359,7 @@ const characters = ([
         abilities: ["Alignment", "Demon", "Positioning", "Setup"]
     },
     {name: "Mezepheles", script: "Experimental", type: "Minion", wakes: "Once", selects: "No", info: "Yes",
-        abilities: ["Execution", "Once/First Time"]
+        abilities: ["Alignment", "Once/First Time"]
     },
     {name: "Organ Grinder", script: "Experimental", type: "Minion", wakes: "No", selects: "No", info: "No",
         abilities: ["Nomination/Voting", "Droisoning"]
@@ -412,7 +412,7 @@ const characters = ([
     {name: "Riot", script: "Experimental", type: "Demon", wakes: "No", selects: "No", info: "No",
         abilities: ["Changes Character", "Causes Death", "Nomination/Voting", "Minions"]
     },
-    {name: "Yaggababble", script: "Experimental", type: "Demon", wakes: "No", selects: "No", info: "Yes",
+    {name: "Yaggababble", script: "Experimental", type: "Demon", wakes: "Once", selects: "No", info: "Yes",
         abilities: ["Causes Death", "Public"]
     }
 ]);
@@ -490,8 +490,15 @@ options.addEventListener('change', (event) => {
     );
 });
 
+let topCon = document.getElementById('topContent');
+
 let guesses = 0;
 let guessCount = document.querySelector('#guessCount p');
+
+let avgGuesses = 'N/A';
+let guessTotal = 0;
+let gamesPlayed = 0;
+let avgGuessCount = document.getElementById('avgGuesses');
 
 let answerWrapper = document.getElementById('guesses');
 let congrats = document.getElementById('congratsMsg');
@@ -606,9 +613,20 @@ function subChar() {
     let messages = Array.from(document.querySelectorAll('#congratsMsg p'));
 
     if (selectedChar.name == answer.name) {
-        guessCount.style.display = 'none';
 
+        topCon.style.display = 'none';
+        guessCount.style.display = 'none';
         congrats.style.display = 'flex';
+
+        //Keeps track of current guesses and games played
+        gamesPlayed++;
+        guessTotal += guesses;
+        avgGuesses = guessTotal / gamesPlayed;
+        //console.log(`Games Played: ${gamesPlayed}`);
+        //console.log(`Total Amount of Guesses Ever: ${guessTotal}`);
+        //console.log(`Average Number of Guesses: ${avgGuesses}`);
+
+        avgGuessCount.textContent = `Average Guesses: ${avgGuesses}`;
 
         if (guesses > 1) {
             messages[1].textContent = `You guessed ${answer.name} in ${guesses} guesses!`;
@@ -621,10 +639,14 @@ function subChar() {
     selectedChar = null;
 }
 
+avgGuessCount.textContent = `Average Guesses: ${avgGuesses}`;
+
 //Start New Game
 function startWordle() {
     //Resets Info
     guesses = 0;
+
+    topCon.style.display = 'flex';
 
     //Resets Elements
     answerWrapper.replaceChildren();
@@ -637,3 +659,37 @@ function startWordle() {
     answer = characters[Math.floor(Math.random() * characters.length)];
     console.log(`Answer: ${answer.name}`);
 }
+
+//TEMPORARY FUNCTION
+function followMouse(elem) {
+    document.addEventListener('mousemove', function(e) {
+        fromLeft = e.pageX;
+        fromTop = e.pageY;
+        elem.style.left = fromLeft + 7 + "px";
+        elem.style.top = fromTop + 8 + "px";
+    });
+}
+
+let div = null;
+
+const leaderboard = document.getElementById('leaderboard');
+leaderboard.style.cursor = 'default';
+
+leaderboard.addEventListener('mouseenter', () => {
+    div = document.createElement('div');
+    let p = document.createElement('p');
+    p.textContent = "There is no leaderboard currently!";
+
+    div.appendChild(p);
+    div.classList.add('hovElem');
+
+    document.body.appendChild(div);
+
+    followMouse(div);
+});
+
+leaderboard.addEventListener('mouseleave', () => {
+    if (div) {
+        div.remove();
+    }
+});
