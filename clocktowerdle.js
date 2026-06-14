@@ -712,10 +712,6 @@ let tableElems = document.querySelector('#leaderboard table');
 
 function addScores(items) {
 
-    if (avgGuesses !== 'N/A' && !items.includes(avgGuesses)) {
-        items.push(avgGuesses);
-    }
-
     let ltgScores = items.toSorted((a, b) => a - b);
 
     for (let i = 0; i < items.length; i++) {
@@ -747,7 +743,13 @@ let leaderboard = document.getElementById('leaderboard');
 let scores = [3.59, 2.47, 4.58, 5.56, 5.29, 2.37];
 
 function viewBoard() {
-    addScores(scores);
+    let displayScores = [...scores];
+
+    if (avgGuesses !== 'N/A') {
+        displayScores.push(avgGuesses);
+    }
+
+    addScores(displayScores);
     
     leaderboard.style.display = 'flex';
 }
