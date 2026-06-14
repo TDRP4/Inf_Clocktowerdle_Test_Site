@@ -11,6 +11,10 @@ body, html {
 }
 
 body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background-image: url("https://cdn.creativefabrica.com/2022/02/20/Purple-abstract-texture-background-Graphics-25584971-1.jpg");
     background-attachment: fixed;
     margin: 0;
@@ -93,3 +97,81 @@ body {
     margin: 0;
     color: red;
 }
+
+#leaderboard {
+    display: none;
+    position: fixed;
+    justify-content: center;
+    align-items: flex-start;
+    overflow-y: scroll;
+    width: 35vh;
+    height: 35vh;
+    top: 40%;
+    background-color: black;
+    border: 0.25vh solid red;
+    z-index: 2;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    height: auto;
+}
+
+th, td {
+    padding: 1vh;
+    text-align: center;
+    font-size: 2.5vh;
+    color: white;
+    border-top: 0.25vh solid red;
+    border-bottom: 0.25vh solid red;
+}
+
+th {
+    position: sticky;
+    top: 0;
+    background-color: red;
+    color: black;
+}
+
+#closeBtn {
+    position: fixed;
+    left: 41.25%;
+    top: 38.5%;
+    font-size: 2.1vh;
+    z-index: 2000;
+}
+
+#closeBtn:hover {
+    cursor: pointer;
+}
+
+#closeBtn:active {
+    cursor: grabbing;
+}
+
+
+/*#leaderboard {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    padding: 2vh 0 2vh 0;
+    width: 25vh;
+    height: auto;
+    background-color: black;
+    z-index: 1000;
+}
+
+#leaderboard p {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 1vh 0 1vh 0;
+    font-size: 2.25vh;
+    color: white;
+    width: 100%;
+    border: 0.25vh solid red;
+    border-bottom: 0.25vh solid red;
+}*/
