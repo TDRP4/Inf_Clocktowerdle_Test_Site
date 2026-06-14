@@ -505,19 +505,19 @@ function subChar() {
     let propType = answer.type;
 
     //Text Color
-    let textColor = null;
+    let elemColor = null;
 
     if (attType === "Townsfolk") {
-        textColor = 'blue';
+        elemColor = '#00166e';
         //console.log(textColor);
     } else if (attType === "Outsider") {
-        textColor = 'cyan';
+        elemColor = '#0083a1';
         //console.log(textColor);
     } else if (attType === "Minion") {
-        textColor = 'orange';
+        elemColor = '#805300';
         //console.log(textColor);
     } else if (attType === "Demon") {
-        textColor = 'red';
+        elemColor = '#800000';
         //console.log(textColor);
     }
 
@@ -563,21 +563,21 @@ function subChar() {
 
     for (let i = 0; i < attributes.length; i++) {
         let p = document.createElement('p');
-        p.textContent = attributes[i]; //Change to "selectedChar"
+        p.textContent = attributes[i];
+        p.style.color = 'white';
 
         let circle = document.createElement('div');
         circle.classList.add('circle');
 
         if (p.textContent !== attributes[0] && p.textContent === properties[i]) {
-            circle.style.background = 'green';
+            circle.style.background = '#005203';
         } else if (p.textContent === attributes[2] && parType || p.textContent === attributes[3] && parWakes
             || p.textContent === attributes[4] && parSelects || p.textContent === attributes[6] && parAb) {
-            circle.style.background = 'yellow';
+            circle.style.background = '#969400';
         } else if (p.textContent === attributes[0]) {
-            circle.style.background = 'bisque';
-            p.style.color = `${textColor}`;
+            circle.style.background = elemColor;
         } else {
-            circle.style.background = 'grey';
+            circle.style.background = '#242424';
         }
 
         let circleWrapper = document.createElement('div');
@@ -733,7 +733,6 @@ let metrics = [
 ];
 
 function addScores(items) {
-
     let totalGuesses = items.reduce((sum, player) => sum + player.guesses, 0);
     let totalGames = items.reduce((sum, player) => sum + player.games, 0);
 
