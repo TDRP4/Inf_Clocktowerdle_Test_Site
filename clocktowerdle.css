@@ -4,8 +4,8 @@
 }
 
 *::selection {
-    background-color: yellow;
-    color: purple;
+    background-color: black;
+    color: red;
 }
 
 body, html {
@@ -13,6 +13,7 @@ body, html {
     flex-direction: column;
     width: 100%;
     justify-content: center;
+    padding-bottom: 10vh;
 }
 
 body {
@@ -20,8 +21,9 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-image: url("https://cdn.creativefabrica.com/2022/02/20/Purple-abstract-texture-background-Graphics-25584971-1.jpg");
+    background-image: url("https://i.postimg.cc/05W06y8s/Clocktowerdle-Background.png");
     background-attachment: fixed;
+    background-size: cover;
     margin: 0;
 }
 
@@ -53,9 +55,52 @@ body {
 }
 
 #answerText p {
-    color: white;
     text-align: center;
     width: 20vh;
+}
+
+p, td, label {
+    font-size: 2.25vh;
+    color: black;
+    text-shadow: 0.1vh 0.1vh 0.5vh red;
+}
+
+select {
+    background-color: black;
+    color: white;
+    border: 0.2vh solid red;
+    border-radius: 8vh;
+}
+
+select::-webkit-scrollbar {
+    background-color: white;
+}
+
+select::-webkit-scrollbar-thumb {
+    background: red;
+    border-radius: 8vh;
+}
+
+button {
+    padding: 0.55vh 1vh 0.35vh 1vh;
+    background-color: #d40000;
+    color: white;
+    border: 0.25vh solid black;
+    box-shadow: 0vh 0vh 0.25vh black;
+    border-radius: 8vh;
+    font-size: 1.8vh;
+}
+
+button:hover {
+    background-color: black;
+    color: white;
+    border: 0.25vh solid red;
+    box-shadow: 0.1vh 0.1vh 0.4vh red;
+    cursor: pointer;
+}
+
+button:active {
+    cursor: grabbing;
 }
 
 .circleWrapper {
@@ -72,12 +117,14 @@ body {
     align-items: center;
     width: 18vh;
     height: 18vh;
-    border: 0.28vh solid black;
+    border: 0.38vh solid red;
     border-radius: 25vh;
+    box-shadow: 0.1vh 0.1vh 0.7vh #800000;
 }
 
 .circle p {
     text-align: center;
+    
 }
 
 #congratsMsg {
@@ -96,11 +143,13 @@ body {
     background-color: black;
     outline: 0.25vh solid red;
     padding: 0.2vh 0.4vh 0.2vh 0.4vh;
+    box-shadow: 0.2vh 0.2vh 0.5vh red;
 }
 
 .hovElem p {
     margin: 0;
     color: red;
+    text-shadow: none;
 }
 
 #leaderboardTxt:hover {
@@ -136,6 +185,7 @@ th, td {
     text-align: center;
     font-size: 2.5vh;
     color: white;
+    text-shadow: 0.1vh 0.1vh 0.5vh red;
 }
 
 tr {
@@ -148,6 +198,7 @@ th {
     top: 0;
     background-color: red;
     color: black;
+    text-shadow: 0.05vh 0.05vh 0.4vh #550000;
 }
 
 #closeBtn {
