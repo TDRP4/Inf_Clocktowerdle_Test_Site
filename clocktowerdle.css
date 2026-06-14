@@ -72,15 +72,6 @@ select {
     border-radius: 8vh;
 }
 
-select::-webkit-scrollbar {
-    background-color: white;
-}
-
-select::-webkit-scrollbar-thumb {
-    background: red;
-    border-radius: 8vh;
-}
-
 button {
     padding: 0.55vh 1vh 0.35vh 1vh;
     background-color: #d40000;
