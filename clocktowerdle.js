@@ -498,6 +498,7 @@ let guessCount = document.querySelector('#guessCount p');
 let avgGuesses = 'N/A';
 let guessTotal = 0;
 let gamesPlayed = 0;
+let gameTotalMsg = '';
 let avgGuessCount = document.getElementById('avgGuesses');
 
 let answerWrapper = document.getElementById('guesses');
@@ -622,7 +623,11 @@ function subChar() {
         gamesPlayed++;
         guessTotal += guesses;
         avgGuesses = guessTotal / gamesPlayed;
-        //console.log(`Games Played: ${gamesPlayed}`);
+
+        if (avgGuesses % 1 !== 0) {
+            avgGuesses = avgGuesses.toFixed(2);
+        }
+        console.log(`Games Played: ${gamesPlayed}`);
         //console.log(`Total Amount of Guesses Ever: ${guessTotal}`);
         //console.log(`Average Number of Guesses: ${avgGuesses}`);
 
@@ -635,6 +640,12 @@ function subChar() {
         }
 
         resetBtn.style.display = 'block';
+
+        if (gamesPlayed > 1 || gamesPlayed == 0) {
+            gameTotalMsg = `(${gamesPlayed} total games)`;
+        } else {
+            gameTotalMsg = `(${gamesPlayed} total game)`;
+        }
     }
     selectedChar = null;
 }
@@ -647,6 +658,8 @@ function startWordle() {
     guesses = 0;
 
     topCon.style.display = 'flex';
+    guessCount.style.display = 'block';
+    guessCount.textContent = '';
 
     //Resets Elements
     answerWrapper.replaceChildren();
@@ -672,13 +685,13 @@ function followMouse(elem) {
 
 let div = null;
 
-const leaderboard = document.getElementById('leaderboard');
-leaderboard.style.cursor = 'default';
+const leaderboardTxt = document.getElementById('leaderboardTxt');
+leaderboardTxt.style.cursor = 'default';
 
-leaderboard.addEventListener('mouseenter', () => {
+leaderboardTxt.addEventListener('mouseenter', () => {
     div = document.createElement('div');
     let p = document.createElement('p');
-    p.textContent = "There is no leaderboard currently!";
+    p.textContent = "There is no leaderboard currently! Click to view what the leaderboard will look like.";
 
     div.appendChild(p);
     div.classList.add('hovElem');
@@ -688,8 +701,60 @@ leaderboard.addEventListener('mouseenter', () => {
     followMouse(div);
 });
 
-leaderboard.addEventListener('mouseleave', () => {
+leaderboardTxt.addEventListener('mouseleave', () => {
     if (div) {
         div.remove();
     }
 });
+
+//LeaderBoard
+let tableElems = document.querySelector('#leaderboard table');
+
+function addScores(items) {
+
+    if (avgGuesses !== 'N/A' && !items.includes(avgGuesses)) {
+        items.push(avgGuesses);
+    }
+
+    let ltgScores = items.toSorted((a, b) => a - b);
+
+    for (let i = 0; i < items.length; i++) {
+        //if (gamesPlayed > 1) { -> Add for when the table uses data from multiple users
+            let tr = document.createElement('tr');
+            tr.classList.add('userScore');
+
+            let td = document.createElement('td');
+
+            if (avgGuesses === 1) {
+                td.textContent = `User ${i + 1} - ${ltgScores[i]} avg guess ${gameTotalMsg}`;
+            } else {
+                td.textContent = `User ${i + 1} - ${ltgScores[i]} avg guesses ${gameTotalMsg}`;
+            }
+
+            if (ltgScores[i] == avgGuesses) {
+                td.style.color = 'red';
+            }
+
+            tr.appendChild(td);
+            tableElems.appendChild(tr);
+        //}
+    }
+}
+
+let leaderboard = document.getElementById('leaderboard');
+
+//Change to real scores later
+let scores = [3.59, 2.47, 4.58, 5.56, 5.29, 2.37];
+
+function viewBoard() {
+    addScores(scores);
+    
+    leaderboard.style.display = 'flex';
+}
+
+function closeBoard() {
+    leaderboard.style.display = 'none';
+
+    let trElems = document.querySelectorAll('.userScore');
+    trElems.forEach(elem => elem.remove());
+}
