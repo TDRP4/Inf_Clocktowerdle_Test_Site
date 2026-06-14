@@ -691,7 +691,7 @@ leaderboardTxt.style.cursor = 'default';
 leaderboardTxt.addEventListener('mouseenter', () => {
     div = document.createElement('div');
     let p = document.createElement('p');
-    p.textContent = "There is no leaderboard currently! Click to view what the leaderboard will look like.";
+    p.textContent = "There is no official leaderboard currently! Click to view what the leaderboard will look like.";
 
     div.appendChild(p);
     div.classList.add('hovElem');
