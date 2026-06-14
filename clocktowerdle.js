@@ -421,7 +421,7 @@ const characters = ([
 let answer = characters[Math.floor(Math.random() * characters.length)];
 
 //Answer Log
-//console.log(`Answer: ${answer.name}`);
+console.log(`Answer: ${answer.name}`);
 
 //Character Log
 /*let num = 1;
@@ -516,7 +516,7 @@ function subChar() {
     //Comparing "Types", "Wakes", and "Selects" Answers
     const simTypes = [["Townsfolk", "Outsider"], ["Minion", "Demon"]];
     const simWakes = ["Always", "Always (Except First)", "Once", "Sometimes"];
-    const simSelects = ["Required", "Optionally"];
+    const simSelects = ["Yes", "Required", "Optionally"];
 
     let attType = selectedChar.type;
     let propType = answer.type;
