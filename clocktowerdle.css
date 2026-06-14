@@ -3,6 +3,11 @@
     font-weight: bold;
 }
 
+*::selection {
+    background-color: yellow;
+    color: purple;
+}
+
 body, html {
     display: flex;
     flex-direction: column;
@@ -108,7 +113,7 @@ body {
     height: 35vh;
     top: 40%;
     background-color: black;
-    border: 0.25vh solid red;
+    border: 0.4vh solid red;
     z-index: 2;
 }
 
@@ -123,6 +128,9 @@ th, td {
     text-align: center;
     font-size: 2.5vh;
     color: white;
+}
+
+tr {
     border-top: 0.25vh solid red;
     border-bottom: 0.25vh solid red;
 }
@@ -149,29 +157,3 @@ th {
 #closeBtn:active {
     cursor: grabbing;
 }
-
-
-/*#leaderboard {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    justify-content: center;
-    align-items: center;
-    padding: 2vh 0 2vh 0;
-    width: 25vh;
-    height: auto;
-    background-color: black;
-    z-index: 1000;
-}
-
-#leaderboard p {
-    display: flex;
-    justify-content: center;
-    margin: 0;
-    padding: 1vh 0 1vh 0;
-    font-size: 2.25vh;
-    color: white;
-    width: 100%;
-    border: 0.25vh solid red;
-    border-bottom: 0.25vh solid red;
-}*/
