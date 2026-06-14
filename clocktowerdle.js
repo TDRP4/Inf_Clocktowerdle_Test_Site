@@ -364,7 +364,7 @@ const characters = ([
     {name: "Organ Grinder", script: "Experimental", type: "Minion", wakes: "No", selects: "No", info: "No",
         abilities: ["Nomination/Voting", "Droisoning"]
     },
-    {name: "Psychopath", script: "Experimental", type: "Minion", wakes: "No", selects: "Yes", info: "No",
+    {name: "Psychopath", script: "Experimental", type: "Minion", wakes: "No", selects: "Optionally", info: "No",
         abilities: ["Public", "Causes Death", "Execution", "Prevents Death"]
     },
     {name: "Summoner", script: "Experimental", type: "Minion", wakes: "Sometimes", selects: "Required", info: "Yes",
@@ -516,7 +516,7 @@ function subChar() {
     //Comparing "Types", "Wakes", and "Selects" Answers
     const simTypes = [["Townsfolk", "Outsider"], ["Minion", "Demon"]];
     const simWakes = ["Always", "Always (Except First)", "Once", "Sometimes"];
-    const simSelects = ["Yes", "Required", "Optionally"];
+    const simSelects = ["Required", "Optionally"];
 
     let attType = selectedChar.type;
     let propType = answer.type;
