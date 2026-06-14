@@ -331,7 +331,7 @@ const characters = ([
     {name: "Politician", script: "Experimental", type: "Outsider", wakes: "No", selects: "No", info: "No",
         abilities: ["Win/Loss", "Alignment"]
     },
-    {name: "Puzzlemaster", script: "Experimental", type: "Outsider", wakes: "No", selects: "Optional", info: "Yes",
+    {name: "Puzzlemaster", script: "Experimental", type: "Outsider", wakes: "No", selects: "Optionally", info: "Yes",
         abilities: ["Droisoning", "Demon", "Once/First Time"]
     },
     {name: "Snitch", script: "Experimental", type: "Outsider", wakes: "No", selects: "No", info: "No",
@@ -452,24 +452,6 @@ function charList(items) {
         option.value = item.name;
         option.textContent = item.name;
 
-        /*
-        //USERS CAN CHEAT WITH THIS
-        if (item.script == "Trouble Brewing" || item.script == "Bad Moon Rising") {
-            option.style.background = 'bisque';
-        } else {
-            option.style.background = '#fff3d6';
-        }
-
-        if (item.type == "Townsfolk") {
-            option.style.color = 'blue';
-        } else if (item.type == "Outsider") {
-            option.style.color = '#00b7ff';
-        } else if (item.type == "Minion") {
-            option.style.color = '#ff7300';
-        } else {
-            option.style.color = 'red';
-        }*/
-
         choices.appendChild(option);
     });
 }
@@ -498,12 +480,13 @@ let guessCount = document.querySelector('#guessCount p');
 let avgGuesses = 'N/A';
 let guessTotal = 0;
 let gamesPlayed = 0;
-let gameTotalMsg = '';
 let avgGuessCount = document.getElementById('avgGuesses');
 
 let answerWrapper = document.getElementById('guesses');
 let congrats = document.getElementById('congratsMsg');
 let resetBtn = document.getElementById('resetPage');
+
+let playerMetrics = '';
 
 //Submit Character
 function subChar() {
@@ -526,16 +509,16 @@ function subChar() {
 
     if (attType === "Townsfolk") {
         textColor = 'blue';
-        console.log(textColor);
+        //console.log(textColor);
     } else if (attType === "Outsider") {
         textColor = 'cyan';
-        console.log(textColor);
+        //console.log(textColor);
     } else if (attType === "Minion") {
         textColor = 'orange';
-        console.log(textColor);
+        //console.log(textColor);
     } else if (attType === "Demon") {
         textColor = 'red';
-        console.log(textColor);
+        //console.log(textColor);
     }
 
     let attWakes = selectedChar.wakes;
@@ -547,15 +530,15 @@ function subChar() {
 
     let commonAb = propAb.filter(item => attAb.includes(item));
 
-    console.log(`Selected Character Abilities: ${attAb}`);
-    console.log(`Answer Abilities: ${propAb}`);
+    //console.log(`Selected Character Abilities: ${attAb}`);
+    //console.log(`Answer Abilities: ${propAb}`);
 
     let matches = attAb.length === propAb.length && attAb.every((value, index) => value === propAb[index]);
 
-    console.log(matches ? "Matches!" : "Does not match");
+    //console.log(matches ? "Matches!" : "Does not match");
 
-    console.log(commonAb);
-    console.log(`Common Abilities: ${commonAb.length}`);
+    //console.log(commonAb);
+    //console.log(`Common Abilities: ${commonAb.length}`);
 
     let parType = simTypes.some(pair =>
         pair.includes(attType) && pair.includes(propType)
@@ -627,7 +610,7 @@ function subChar() {
         if (avgGuesses % 1 !== 0) {
             avgGuesses = avgGuesses.toFixed(2);
         }
-        console.log(`Games Played: ${gamesPlayed}`);
+        //console.log(`Games Played: ${gamesPlayed}`);
         //console.log(`Total Amount of Guesses Ever: ${guessTotal}`);
         //console.log(`Average Number of Guesses: ${avgGuesses}`);
 
@@ -640,14 +623,11 @@ function subChar() {
         }
 
         resetBtn.style.display = 'block';
-
-        if (gamesPlayed > 1 || gamesPlayed == 0) {
-            gameTotalMsg = `(${gamesPlayed} total games)`;
-        } else {
-            gameTotalMsg = `(${gamesPlayed} total game)`;
-        }
     }
+
     selectedChar = null;
+
+    playerMetrics = {user: "user1", avg: avgGuesses, games: gamesPlayed, guesses: guessTotal, adjustedAvg: ""};
 }
 
 avgGuessCount.textContent = `Average Guesses: ${avgGuesses}`;
@@ -687,11 +667,18 @@ let div = null;
 
 const leaderboardTxt = document.getElementById('leaderboardTxt');
 leaderboardTxt.style.cursor = 'default';
+avgGuessCount.style.cursor = 'default';
 
 leaderboardTxt.addEventListener('mouseenter', () => {
     div = document.createElement('div');
     let p = document.createElement('p');
-    p.textContent = "There is no official leaderboard currently! Click to view what the leaderboard will look like.";
+
+    if (gamesPlayed > 1) {
+        p.textContent = "There is no official leaderboard currently! Click to view what the leaderboard will look like.";
+    } else {
+        p.textContent = `There is no official leaderboard currently! Click to view what the leaderboard will look like \n
+    (must play at least 2 games to view yourself on the leaderboard)`;
+    }
 
     div.appendChild(p);
     div.classList.add('hovElem');
@@ -707,50 +694,91 @@ leaderboardTxt.addEventListener('mouseleave', () => {
     }
 });
 
+avgGuessCount.addEventListener('mouseenter', () => {
+    div = document.createElement('div');
+    let p = document.createElement('p');
+
+    if (gamesPlayed == 1) {
+        p.textContent = `${gamesPlayed} game played`;
+    } else {
+        p.textContent = `${gamesPlayed} games played`;
+    }
+
+    div.appendChild(p);
+    div.classList.add('hovElem');
+
+    document.body.appendChild(div);
+
+    followMouse(div);
+});
+
+avgGuessCount.addEventListener('mouseleave', () => {
+    if (div) {
+        div.remove();
+    }
+});
+
 //LeaderBoard
 let tableElems = document.querySelector('#leaderboard table');
-
-function addScores(items) {
-
-    let ltgScores = items.toSorted((a, b) => a - b);
-
-    for (let i = 0; i < items.length; i++) {
-        //if (gamesPlayed > 1) { -> Add for when the table uses data from multiple users
-            let tr = document.createElement('tr');
-            tr.classList.add('userScore');
-
-            let td = document.createElement('td');
-
-            if (avgGuesses === 1) {
-                td.textContent = `User ${i + 1} - ${ltgScores[i]} avg guess ${gameTotalMsg}`;
-            } else {
-                td.textContent = `User ${i + 1} - ${ltgScores[i]} avg guesses ${gameTotalMsg}`;
-            }
-
-            if (ltgScores[i] == avgGuesses) {
-                td.style.color = 'red';
-            }
-
-            tr.appendChild(td);
-            tableElems.appendChild(tr);
-        //}
-    }
-}
-
 let leaderboard = document.getElementById('leaderboard');
 
 //Change to real scores later
-let scores = [3.59, 2.47, 4.58, 5.56, 5.29, 2.37];
+let metrics = [
+    {user: "user2", avg: 3.60, games: 10, guesses: 36, adjustedAvg: ""},
+    {user: "user3", avg: 3.60, games: 20, guesses: 72, adjustedAvg: ""},
+    {user: "user4", avg: 3.80, games: 60, guesses: 228, adjustedAvg: ""},
+    {user: "user5", avg: 5, games: 25, guesses: 125, adjustedAvg: ""},
+    {user: "user6", avg: 4.15, games: 100, guesses: 415, adjustedAvg: ""},
+    {user: "user7", avg: 2.5, games: 12, guesses: 30, adjustedAvg: ""},
+    {user: "user8", avg: 2.56, games: 25, guesses: 64, adjustedAvg: ""}
+];
 
-function viewBoard() {
-    let displayScores = [...scores];
+function addScores(items) {
 
-    if (avgGuesses !== 'N/A') {
-        displayScores.push(avgGuesses);
+    let totalGuesses = items.reduce((sum, player) => sum + player.guesses, 0);
+    let totalGames = items.reduce((sum, player) => sum + player.games, 0);
+
+    let avgAvg = totalGuesses / totalGames;
+    //console.log(`${totalGuesses} / ${totalGames} = ${avgAvg}`);
+
+    for (let i = 0; i < items.length; i++) {
+        let average = (items[i].avg * items[i].games + avgAvg * 20) / (items[i].games + 20);
+        items[i].adjustedAvg = average;
+        //console.log(`${items[i].user} Adjusted Average: ${items[i].adjustedAvg}`);
     }
 
-    addScores(displayScores);
+    let ltgScores = items.sort((a, b) => a.adjustedAvg - b.adjustedAvg);
+
+    for (let i = 0; i < items.length; i++) {
+
+        let tr = document.createElement('tr');
+        tr.classList.add('userScore');
+
+        let td = document.createElement('td');
+
+        if (ltgScores[i].games > 1) {
+            td.textContent = `${ltgScores[i].user} - ${ltgScores[i].avg} avg guesses (${ltgScores[i].games} total games)`;
+        }
+
+        if (ltgScores[i].avg == avgGuesses) {
+            td.style.color = 'red';
+        }
+
+        tr.appendChild(td);
+        tableElems.appendChild(tr);
+    }
+}
+
+function viewBoard() {
+    let displayScores = [...metrics];
+
+    if (gamesPlayed > 1) {
+        displayScores.push(playerMetrics);
+        //console.log(displayScores);
+    }
     
+    addScores(displayScores);
+
     leaderboard.style.display = 'flex';
 }
 
