@@ -103,6 +103,14 @@ body {
     color: red;
 }
 
+#leaderboardTxt:hover {
+    cursor: pointer;
+}
+
+#leaderboardTxt:active {
+    cursor: grabbing;
+}
+
 #leaderboard {
     display: none;
     position: fixed;
