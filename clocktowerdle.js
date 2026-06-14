@@ -760,6 +760,7 @@ function addScores(items) {
 
         if (ltgScores[i].avg == avgGuesses) {
             td.style.color = 'red';
+            td.style.textShadow = '0.2vh 0.2vh 0.4vh purple';
         }
 
         tr.appendChild(td);
