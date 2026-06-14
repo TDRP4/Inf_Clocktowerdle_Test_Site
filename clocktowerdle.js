@@ -421,7 +421,7 @@ const characters = ([
 let answer = characters[Math.floor(Math.random() * characters.length)];
 
 //Answer Log
-console.log(`Answer: ${answer.name}`);
+//console.log(`Answer: ${answer.name}`);
 
 //Character Log
 /*let num = 1;
@@ -666,7 +666,6 @@ function followMouse(elem) {
 let div = null;
 
 const leaderboardTxt = document.getElementById('leaderboardTxt');
-leaderboardTxt.style.cursor = 'default';
 avgGuessCount.style.cursor = 'default';
 
 leaderboardTxt.addEventListener('mouseenter', () => {
