@@ -2,7 +2,7 @@
 <meta charset="utf-8">
 <html>
 <head>
-    <title>Infinite Clocktowerdle (v0.4) RAHHHH</title>
+    <title>Infinite Clocktowerdle (v0.5)</title>
     <link rel="icon" type="img/png" href="https://i.postimg.cc/4NZpsvk8/Yaggababble-3D-Model-Icon.png">
     <link rel="stylesheet" href="clocktowerdle.css">
 </head>
@@ -12,20 +12,20 @@
 <body>
 
     <div style="display: flex; flex-direction: column; justify-content: center; padding: 4vh; text-align: center; align-items: center; row-gap: 2vh;">
-        <p style="color: white; margin: 0;">Infinite Clocktowerdle v0.4</p>
-        <p style="color: red; font-size: 4vh; margin: 0;">WARNING: THIS IS A TEST SITE; NOT THE OFFICIAL VERSION</p>
+        <p style="text-shadow: none;">Infinite Clocktowerdle v0.5</p>
+        <p style="color: red; text-shadow: none; font-size: 4vh; margin: 0;">WARNING: THIS IS A TEST SITE; NOT THE OFFICIAL VERSION</p>
     </div>
 
     <div style="display: flex; justify-content: center; gap: 25vh;">
-        <p id="leaderboardTxt" onclick="viewBoard()" style="color: white;">Leaderboard</p>
-        <p id="avgGuesses" style="color: white;" id="guessAvg"></p>
+        <p id="leaderboardTxt" onclick="viewBoard()">Leaderboard</p>
+        <p id="avgGuesses"></p>
     </div>
 
     <div style="display: flex; width: 100%; height: 100vh; justify-content: center;">
         <div id="content"> <!--Content Wrapper-->
             <div id="topContent">
                 <div id="characters">
-                    <label style="color: white;">Choose a character:</label>
+                    <label>Choose a character:</label>
                     <select>
                         <option></option>
                     </select>
@@ -35,11 +35,11 @@
             </div>
 
             <div id="congratsMsg">
-                <p style="font-size: 5vh; color: lime;">Congratulations!</p>
-                <p style="color: white;">You guessed it!</p>
+                <p style="font-size: 5vh; color: red; text-shadow: 0.1vh 0.1vh 0.5vh #800000;">Congratulations!</p>
+                <p>You guessed it!</p>
             </div>
 
-            <div id="guessCount"><p style="color: white;"></p></div>
+            <div id="guessCount"><p></p></div>
 
             <button onclick="startWordle()" id="resetPage" style="display: none;">New Clocktowerdle -></button>
 
