@@ -755,7 +755,7 @@ function addScores(items) {
         let td = document.createElement('td');
 
         if (ltgScores[i].games > 1) {
-            td.textContent = `${ltgScores[i].user} - ${ltgScores[i].avg} avg guesses (${ltgScores[i].games} total games)`;
+            td.textContent = `${i + 1}. ${ltgScores[i].user} - ${ltgScores[i].avg} avg guesses (${ltgScores[i].games} total games)`;
         }
 
         if (ltgScores[i].avg == avgGuesses) {
