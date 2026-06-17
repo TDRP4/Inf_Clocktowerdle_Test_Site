@@ -120,6 +120,17 @@ button:active {
     border: 0.38vh solid red;
     border-radius: 25vh;
     box-shadow: 0.1vh 0.1vh 0.7vh #800000;
+    animation: expand 0.32s ease-in;
+}
+
+@keyframes expand {
+    from {
+        transform: scaleX(0);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
 }
 
 .circle p {
