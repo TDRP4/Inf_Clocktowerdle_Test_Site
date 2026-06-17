@@ -352,7 +352,7 @@ const characters = ([
     {name: "Goblin", script: "Experimental", type: "Minion", wakes: "No", selects: "No", info: "No",
         abilities: ["Execution", "Win/Loss", "Public", "Specific Character"]
     },
-    {name: "Harpy", script: "Experimental", type: "Minion", wakes: "Yes", selects: "Required", info: "No",
+    {name: "Harpy", script: "Experimental", type: "Minion", wakes: "Always", selects: "Required", info: "No",
         abilities: ["Madness", "Alignment", "Causes Death"]
     },
     {name: "Marionette", script: "Experimental", type: "Minion", wakes: "?", selects: "?", info: "?",
@@ -729,7 +729,8 @@ let metrics = [
     {user: "user5", avg: 5, games: 25, guesses: 125, adjustedAvg: ""},
     {user: "user6", avg: 4.15, games: 100, guesses: 415, adjustedAvg: ""},
     {user: "user7", avg: 2.5, games: 12, guesses: 30, adjustedAvg: ""},
-    {user: "user8", avg: 2.56, games: 25, guesses: 64, adjustedAvg: ""}
+    {user: "user8", avg: 2.56, games: 25, guesses: 64, adjustedAvg: ""},
+    {user: "user9", avg: 3, games: 100, guesses: 300, adjustedAvg: ""}
 ];
 
 function addScores(items) {
@@ -758,7 +759,7 @@ function addScores(items) {
             td.textContent = `${i + 1}. ${ltgScores[i].user} - ${ltgScores[i].avg} avg guesses (${ltgScores[i].games} total games)`;
         }
 
-        if (ltgScores[i].avg == avgGuesses) {
+        if (ltgScores[i].user == playerMetrics.user) {
             td.style.color = 'red';
             td.style.textShadow = '0.2vh 0.2vh 0.4vh purple';
         }
