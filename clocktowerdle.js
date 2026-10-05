@@ -361,7 +361,7 @@ const characters = ([
     {name: "Mezepheles", script: "Experimental", type: "Minion", wakes: "Once", selects: "No", info: "Yes",
         abilities: ["Alignment", "Once/First Time"]
     },
-    {name: "Organ Grinder", script: "Experimental", type: "Minion", wakes: "No", selects: "No", info: "No",
+    {name: "Organ Grinder", script: "Experimental", type: "Minion", wakes: "Always", selects: "No", info: "No",
         abilities: ["Nomination/Voting", "Droisoning"]
     },
     {name: "Psychopath", script: "Experimental", type: "Minion", wakes: "No", selects: "Optionally", info: "No",
